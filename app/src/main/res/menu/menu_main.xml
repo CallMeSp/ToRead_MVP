@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sp.toread.MainActivity">
+    <item
+        android:id="@+id/test1"
+        android:title="morefunction1"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/test2"
+        android:title="morefunction2"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/test3"
+        android:title="morefunction3"
+        app:showAsAction="never"/>
+</menu>

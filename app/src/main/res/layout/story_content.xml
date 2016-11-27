@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.sp.toread.TextContent"
+    android:fitsSystemWindows="true"
+    android:id="@+id/scrollView"
+    android:background="@color/tan">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contenttitle"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/story"
+            android:layout_below="@+id/contenttitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/tan"
+            android:textSize="20sp"
+            android:lineSpacingMultiplier="1.5"/>
+</RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

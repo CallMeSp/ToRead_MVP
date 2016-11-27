@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by my on 2016/11/12.
+ * Created by sp on 2016/11/12.
  */
 public class ListActivity extends Activity implements IlistActivity{
     private ListView listView;

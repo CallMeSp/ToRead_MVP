@@ -1,13 +1,17 @@
 package com.sp.areader;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.Gravity;
@@ -44,25 +48,21 @@ public class TextActivity extends Activity {
     private PopupWindow popupWindow;
     private View popupview;
     private Button button1,button2,button3,button4;
-    public static int sss;
+    private LocalBroadcastManager localBroadcastManager;
+
     @Override
     protected void onCreate(Bundle s){
         super.onCreate(s);
         setContentView(R.layout.story_content);
+        localBroadcastManager=LocalBroadcastManager.getInstance(this);
         title=(TextView)findViewById(R.id.contenttitle);
         textView=(TextView)findViewById(R.id.story);scrollView=(NestedScrollView)findViewById(R.id.scrollView);
         Intent intent=getIntent();
-
         mstate=intent.getStringExtra("state");
         url=intent.getStringExtra("url");
         position= Integer.valueOf(intent.getStringExtra("position")).intValue();
         nexturl=intent.getStringArrayListExtra("urllist");
         titles=intent.getStringArrayListExtra("titlelist");
-
-
-        ltitle=intent.getStringExtra("fromlist_1");
-        lurl=intent.getStringExtra("fromlist_2");
-
         getText(url);
 
         popupview=getLayoutInflater().inflate(R.layout.popup_menu, null);
@@ -79,13 +79,6 @@ public class TextActivity extends Activity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1=new Intent(TextActivity.this, ListActivity.class);
-                intent1.putExtra("fromtext",""+position);
-                intent1.putExtra("title",ltitle);
-                intent1.putExtra("url",lurl);
-                intent1.putExtra("state",""+mstate);
-                startActivity(intent1);
-                //sss=position;
                 finish();
             }
         });
@@ -160,4 +153,11 @@ public class TextActivity extends Activity {
             }
         }
     };
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Intent myintent=new Intent("showthePOSITION");
+        myintent.putExtra("test",position+"");
+        localBroadcastManager.sendBroadcast(myintent);
+    }
 }

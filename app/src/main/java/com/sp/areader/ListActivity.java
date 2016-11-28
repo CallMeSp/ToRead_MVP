@@ -1,11 +1,15 @@
 package com.sp.areader;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,7 +44,9 @@ public class ListActivity extends Activity implements IlistActivity{
     private ToggleButton toggleButton;
     private ListViewAdapter adapter;
     private ArrayList<String> catalogitems=new ArrayList<String>(),nextchapter_url_list=new ArrayList<String>();
-
+    private IntentFilter intentFilter;
+    private LocalBroadcastManager localBroadcastManager;
+    private LocalReceiver localReceiver;
     private ArrayList<catalogue> catalogues=new ArrayList<catalogue>();
 
     private String url,mstitle;
@@ -57,6 +63,12 @@ public class ListActivity extends Activity implements IlistActivity{
         super.onCreate(s);
         setContentView(R.layout.listactivity_layout);
         state=false;
+        localBroadcastManager=LocalBroadcastManager.getInstance(this);
+        intentFilter=new IntentFilter();
+        localReceiver=new LocalReceiver();
+        intentFilter.addAction("showthePOSITION");
+        localBroadcastManager.registerReceiver(localReceiver,intentFilter);
+
 
         listView=(ListView)findViewById(R.id.catalague_list);
 
@@ -92,11 +104,8 @@ public class ListActivity extends Activity implements IlistActivity{
                 intent.putExtra("url", a);
                 intent.putExtra("position", "" + position);
                 intent.putExtra("state",""+state);
-                intent.putExtra("fromlist_1",mstitle);
-                intent.putExtra("fromlist_2", url);
                 Log.e("0", "position=" + position);
                 startActivity(intent);
-                finish();
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {//写个popupwindow事件。弹出添加书签功能。
@@ -160,6 +169,13 @@ public class ListActivity extends Activity implements IlistActivity{
             state=true;
         }
     }
+    class LocalReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context,Intent mintent){
+            int pos=Integer.valueOf(mintent.getStringExtra("test")).intValue();
+            listView.setSelection(pos);
+        }
+    }
     @Override
     public void updateUI(ArrayList<String> namelist,ArrayList<String> urllist ){
         catalogitems.clear();nextchapter_url_list.clear();
@@ -177,5 +193,10 @@ public class ListActivity extends Activity implements IlistActivity{
     @Override
     public void hideP(){
         Message.obtain(mhandeler,2).sendToTarget();
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        localBroadcastManager.unregisterReceiver(localReceiver);
     }
 }

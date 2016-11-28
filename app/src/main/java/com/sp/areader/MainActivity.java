@@ -20,6 +20,7 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements ImainActivity{
+
     SearchView searchView;
     TabLayout tabLayout;
     ViewPager viewPager;

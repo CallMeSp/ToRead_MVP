@@ -35,12 +35,9 @@ public class bookbiz implements Ibookbiz{//根据搜索的书目名字拿到书�
             public void run() {
                 try {
                     books.clear();
-                    Log.e("0", "search starts");
                     Document doc = Jsoup.connect("http://so.37zw.com/cse/search?q=" + searchname + "&click=1&s=2041213923836881982&nsid=")
                             .get();
-                    // Log.e("0","doc:"+doc);
                     Elements items=doc.select("div.game-legend-a");
-                    //Log.e("0","items:"+items);
                     for (Element Item : items) {
                         Log.e("0","Item:"+Item);
                         String title=Item.select("h3").text();
@@ -56,11 +53,8 @@ public class bookbiz implements Ibookbiz{//根据搜索的书目名字拿到书�
                         mybook.setBook_cover(IMG);
                         mybook.setContenturl(ur);
                         books.add(mybook);
-                        //search_bookvover_list.add(bitmap);
-                        Log.e("0", "tt:" + title + "  detail:" + detail + "      ur:" + ur + "    writer:" + writer+"    img:"+IMG);
                     }
                     presenter.updatelist(books);
-                    Log.e("0", "thread ends");
                 } catch (IOException e){
 
                     e.printStackTrace();

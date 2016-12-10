@@ -44,9 +44,11 @@ public class ListActivity extends Activity implements IlistActivity{
     private ToggleButton toggleButton;
     private ListViewAdapter adapter;
     private ArrayList<String> catalogitems=new ArrayList<String>(),nextchapter_url_list=new ArrayList<String>();
+
     private IntentFilter intentFilter;
     private LocalBroadcastManager localBroadcastManager;
     private LocalReceiver localReceiver;
+
     private ArrayList<catalogue> catalogues=new ArrayList<catalogue>();
 
     private String url,mstitle;
@@ -64,6 +66,7 @@ public class ListActivity extends Activity implements IlistActivity{
         setContentView(R.layout.listactivity_layout);
         state=false;
         localBroadcastManager=LocalBroadcastManager.getInstance(this);
+
         intentFilter=new IntentFilter();
         localReceiver=new LocalReceiver();
         intentFilter.addAction("showthePOSITION");
@@ -76,8 +79,10 @@ public class ListActivity extends Activity implements IlistActivity{
         progressBar=(ProgressBar)findViewById(R.id.list_progressbar);
         toggleButton=(ToggleButton)findViewById(R.id.change_sequence);
         Intent intent=getIntent();
+
         mstitle=intent.getStringExtra("title");
         url=intent.getStringExtra("url");
+
         textView.setText(mstitle);
         try {
             pos_from_text=Integer.valueOf(intent.getStringExtra("fromtext")).intValue();

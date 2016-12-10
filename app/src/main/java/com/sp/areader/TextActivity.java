@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,15 +14,19 @@ import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.sp.areader.bean.catalogue;
 
@@ -35,7 +40,7 @@ import java.util.ArrayList;
 /**
  * Created by my on 2016/11/9.
  */
-public class TextActivity extends Activity {
+public class TextActivity extends AppCompatActivity {
     public TextView textView,title;
     public String url="",text="";
     public ArrayList<String> nexturl=new ArrayList<String>(),titles=new ArrayList<String>();
@@ -47,7 +52,9 @@ public class TextActivity extends Activity {
     private NavigationView navigationView;
     private PopupWindow popupWindow;
     private View popupview;
-    private Button button1,button2,button3,button4;
+    private Button button1,button2,button4;
+    private ToggleButton button3;
+
     private LocalBroadcastManager localBroadcastManager;
 
     @Override
@@ -74,7 +81,7 @@ public class TextActivity extends Activity {
 
         button1=(Button)popupview.findViewById(R.id.pop_cata);
         button2=(Button)popupview.findViewById(R.id.pop_text);
-        button3=(Button)popupview.findViewById(R.id.pop_light);
+        button3=(ToggleButton) popupview.findViewById(R.id.pop_light);
         button4=(Button)popupview.findViewById(R.id.pop_download);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +89,24 @@ public class TextActivity extends Activity {
                 finish();
             }
         });
+        button3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    textView.setBackgroundColor(Color.BLACK);
+                    textView.setTextColor(Color.WHITE);
+                    title.setBackgroundColor(Color.BLACK);
+                    title.setTextColor(Color.WHITE);
+
+                }else {
+                    textView.setBackgroundColor(getResources().getColor(R.color.tan));
+                    textView.setTextColor(Color.BLACK);
+                    title.setBackgroundColor(getResources().getColor(R.color.tan));
+                    title.setTextColor(Color.BLACK);
+                }
+            }
+        });
+        //根据触摸位置判断是下一章还是上一章
         textView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -114,7 +139,6 @@ public class TextActivity extends Activity {
                         getText((nexturl.get(position)));
                     }
                 }else{
-                    Toast.makeText(TextActivity.this,"show cataloga",Toast.LENGTH_SHORT).show();
                     popupWindow.showAtLocation(findViewById(R.id.scrollView), Gravity.BOTTOM,0,0);
                 }
             }

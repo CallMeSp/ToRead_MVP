@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.sp.areader.MainActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,10 +15,13 @@ import java.util.List;
 public class TabAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
+    private ArrayList<String> title=new ArrayList<String>();
 
     public TabAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
+        title.add("我的");
+        title.add("在线");
     }
 
 
@@ -25,15 +29,13 @@ public class TabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         return fragments.get(position);
     }
-
     @Override
     public int getCount() {
         return fragments.size();
     }
-
     @Override
     public CharSequence getPageTitle(int position) {
-        return MainActivity.tabTitle[position];
+        return title.get(position);
 
     }
 }

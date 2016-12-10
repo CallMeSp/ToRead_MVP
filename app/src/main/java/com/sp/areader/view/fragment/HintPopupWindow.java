@@ -124,7 +124,7 @@ public class HintPopupWindow {
             //float y = arr[1] - frame.top + locationView.getHeight();
             float y = arr[1] - frame.top;
             linearLayout.setX(x);
-            linearLayout.setY(y+50);
+            linearLayout.setY(y+100);
 
             /*捕获当前activity的布局视图, 因为我们要动态模糊, 所以这个布局一定要是最新的,
             *这样我们把模糊后的布局盖到屏幕上时, 才能让用户感觉不出来变化*/

@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".ListActivity"
-            android:theme="@style/hehe"/>
+            android:theme="@style/listtheme"/>
         <activity android:name=".TextActivity"
             android:theme="@style/hehe"/>
     </application>

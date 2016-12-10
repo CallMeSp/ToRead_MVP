@@ -11,7 +11,7 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:gravity="center_horizontal">
         <android.support.design.widget.TabLayout
-            android:id="@+id/titletab"
+            android:id="@+id/title_tab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fillViewport="false"
@@ -21,7 +21,7 @@
         </android.support.design.widget.TabLayout>
     </LinearLayout>
     <android.support.v4.view.ViewPager
-        android:id="@+id/contentpager"
+        android:id="@+id/content_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v4.view.ViewPager>

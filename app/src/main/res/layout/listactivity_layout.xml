@@ -1,55 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ListActivity"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/tan"
-    android:fitsSystemWindows="true">
-    <RelativeLayout
+    android:theme="@style/hehe">
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:id="@+id/xxxxx">
-        <TextView
+        android:layout_height="wrap_content"
+        android:id="@+id/app_bar">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:id="@+id/catalog_title"
-            android:layout_centerHorizontal="true"
-            android:layout_toRightOf="@+id/download"
-            android:layout_toLeftOf="@+id/change_sequence"
-            android:gravity="center"
-            android:singleLine="true"
-            android:text="title"/>
-        <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/download"
-            android:id="@+id/change_sequence"
-            android:layout_alignParentRight="true"
-            android:paddingRight="20dp"
-            android:textOn="正序"
-            android:textOff="倒序"
-            android:background="@android:color/transparent"
-            android:checked="false" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/download"
-            android:text="缓存"
-            android:layout_alignParentLeft="true"
-            android:paddingLeft="20dp"
-            android:background="@android:color/transparent"/>
-    </RelativeLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:background="@color/tan">
+            <include layout="@layout/list_bar"/>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/catalague_list"
-            android:layout_marginTop="?attr/actionBarSize"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:id="@+id/catalague_list">
         </ListView>
         <ProgressBar
             android:layout_width="50dp"

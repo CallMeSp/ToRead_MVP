@@ -6,8 +6,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    tools:context="com.sp.toread.TextContent"
-    android:fitsSystemWindows="true"
+    tools:context="com.sp.areader.TextActivity"
     android:id="@+id/scrollView"
     android:background="@color/tan">
     <RelativeLayout

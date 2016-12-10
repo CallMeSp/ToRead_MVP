@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +44,8 @@ public class SearchActivity extends Activity implements IsearchActivity{
     private RecyclerView recyclerView;
     private SearchView searchView;
     private HintPopupWindow hintPopupWindow;
+    private int longClickposition;
+    private LocalBroadcastManager addtoBookShelf;
     ArrayList<book> my_book=new ArrayList<book>();
     searchPresenter presenter=new searchPresenter(this);
     ProgressBar progressBar;
@@ -52,6 +55,7 @@ public class SearchActivity extends Activity implements IsearchActivity{
         setContentView(R.layout.search_layout);
         Intent intent=getIntent();
         searchname=intent.getStringExtra("searchname");
+        addtoBookShelf= LocalBroadcastManager.getInstance(this);
         searchView=(SearchView)findViewById(R.id.search_again);
         recyclerView=(RecyclerView)findViewById(R.id.recycler_search);
         progressBar=(ProgressBar)findViewById(R.id.search_progressbar);
@@ -84,25 +88,37 @@ public class SearchActivity extends Activity implements IsearchActivity{
             @Override
             public void onLoved(int position) {//改成弹出popupwindow->收藏等功能
                 View view = linearLayoutManager.findViewByPosition(position);
+                longClickposition=position;
                 hintPopupWindow.showPopupWindow(view);
             }
         });
         //下面的操作是初始化弹出数据
         ArrayList<String> strList = new ArrayList<>();
         strList.add("加入书架");
-        strList.add("选项2");
-        strList.add("选项3");
+        strList.add("取消");
         ArrayList<View.OnClickListener> clickList = new ArrayList<>();
+        View.OnClickListener clickListener0=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myintent=new Intent("addToShelf");
+                myintent.putExtra("lovedBook_name",my_book.get(longClickposition).getBook_name());
+                myintent.putExtra("lovedBook_writer",my_book.get(longClickposition).getBook_writter());
+                myintent.putExtra("lovedBook_detail",my_book.get(longClickposition).getBook_details());
+                myintent.putExtra("lovedBook_imgurl",my_book.get(longClickposition).getBook_cover());
+                myintent.putExtra("lovedBook_contenturl",my_book.get(longClickposition).getContenturl());
+                addtoBookShelf.sendBroadcast(myintent);
+                Log.e("执行","broadcast");
+                hintPopupWindow.gonePopupWindow();
+            }
+        };
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //dbHelper.insert("gg", "hh");
-                //cursor.requery();
-                Toast.makeText(SearchActivity.this, "点击事件触发", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchActivity.this, longClickposition+"点击事件触发"+my_book.get(longClickposition).getBook_name(), Toast.LENGTH_SHORT).show();
+                hintPopupWindow.gonePopupWindow();
             }
         };
-        clickList.add(clickListener);
-        clickList.add(clickListener);
+        clickList.add(clickListener0);
         clickList.add(clickListener);
         //初始化
         hintPopupWindow = new HintPopupWindow(this, strList, clickList);

@@ -12,5 +12,4 @@ public class BookshelfPresenter {
     public BookshelfPresenter(IBookShelf bookShelf){
         this.iBookShelf=bookShelf;
     }
-
 }

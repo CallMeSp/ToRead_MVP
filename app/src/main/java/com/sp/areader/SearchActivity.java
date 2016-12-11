@@ -64,7 +64,7 @@ public class SearchActivity extends Activity implements IsearchActivity{
         linearLayoutManager.setOrientation(OrientationHelper.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
-        presenter.getlist(searchname);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -122,6 +122,7 @@ public class SearchActivity extends Activity implements IsearchActivity{
         clickList.add(clickListener);
         //初始化
         hintPopupWindow = new HintPopupWindow(this, strList, clickList);
+        presenter.getlist(searchname);
     }
     Handler mhandeler = new Handler() {
         @Override

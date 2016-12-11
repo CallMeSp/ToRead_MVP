@@ -9,16 +9,20 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/app_bar">
+        android:id="@+id/app_bar"
+        android:elevation="0dp">
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary">
+            android:background="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:elevation="0dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Reader"
+                android:text="猫眼阅读"
+                android:textColor="@color/white"
                 android:textSize="24sp"
                 android:gravity="center_vertical"/>
             <SearchView
@@ -30,5 +34,11 @@
             </SearchView>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
-    <include layout="@layout/content_tab" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@color/moccasin">
+        <include layout="@layout/content_tab" />
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

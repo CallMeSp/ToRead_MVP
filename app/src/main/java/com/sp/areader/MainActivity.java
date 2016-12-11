@@ -7,6 +7,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.widget.FrameLayout;
 import android.widget.SearchView;
 
 import com.sp.areader.adapter.TabAdapter;
@@ -16,6 +18,7 @@ import com.sp.areader.view.ImainActivity;
 import com.sp.areader.view.IsearchActivity;
 import com.sp.areader.view.fragment.BookShelf;
 import com.sp.areader.view.fragment.OnlineShelf;
+import com.sp.areader.view.fragment.WaveView3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements ImainActivity{
     TabLayout tabLayout;
     ViewPager viewPager;
     Toolbar toolbar;
+    WaveView3 waveView3;
     private ArrayList<Fragment> Fragments=new ArrayList<Fragment>();
     mainPresenter mainPresenter=new mainPresenter(this);
     private TabAdapter adapter;
@@ -50,7 +54,16 @@ public class MainActivity extends AppCompatActivity implements ImainActivity{
         tabLayout.setupWithViewPager(viewPager);
         //设置可以滑动
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        
+        waveView3=(WaveView3)findViewById(R.id.wave_view);
+        final FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-2,-2);
+        lp.gravity = Gravity.BOTTOM| Gravity.CENTER;
+        waveView3.setOnWaveAnimationListener(new WaveView3.OnWaveAnimationListener() {
+            @Override
+            public void OnWaveAnimation(float y) {
+                lp.setMargins(0,0,0,(int)y+2);
+                tabLayout.setLayoutParams(lp);
+            }
+        });
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

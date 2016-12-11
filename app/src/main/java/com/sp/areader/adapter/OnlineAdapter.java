@@ -4,24 +4,26 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.sp.areader.MainActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by my on 2016/11/7.
  */
-public class TabAdapter extends FragmentPagerAdapter {
+public class OnlineAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
     private ArrayList<String> title=new ArrayList<String>();
 
-    public TabAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public OnlineAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
-        title.add("书架");
-        title.add("推荐");
+        title.add("玄幻");
+        title.add("修真");
+        title.add("都市");
+        title.add("穿越");
+        title.add("网游");
+        title.add("科幻");
     }
 
 

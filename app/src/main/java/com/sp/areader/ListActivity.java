@@ -116,7 +116,7 @@ public class ListActivity extends Activity implements IlistActivity{
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {//写个popupwindow事件。弹出添加书签功能。
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                hintPopupWindow.showPopupWindow(view);
+                //hintPopupWindow.showPopupWindow(view);
                 return true;
             }
         });

@@ -80,9 +80,9 @@ public class TextActivity extends AppCompatActivity {
         popupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
 
         button1=(Button)popupview.findViewById(R.id.pop_cata);
-        button2=(Button)popupview.findViewById(R.id.pop_text);
+        //button2=(Button)popupview.findViewById(R.id.pop_text);
         button3=(ToggleButton) popupview.findViewById(R.id.pop_light);
-        button4=(Button)popupview.findViewById(R.id.pop_download);
+        //button4=(Button)popupview.findViewById(R.id.pop_download);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

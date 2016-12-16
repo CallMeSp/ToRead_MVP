@@ -8,7 +8,6 @@ import com.sp.areader.bean.book;
 import com.sp.areader.presenter.searchPresenter;
 import com.sp.areader.view.ImainActivity;
 import com.sp.areader.view.IsearchActivity;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,11 +17,12 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by my on 2016/11/22.
  */
-public class bookbiz implements Ibookbiz{//根据搜索的书目名字拿到书的列表
+public class bookbiz implements Ibookbiz{     //根据搜索的书目名字拿到书的列表
     ArrayList<book> books=new ArrayList<book>();
     searchPresenter presenter;
     public bookbiz(searchPresenter presenter){

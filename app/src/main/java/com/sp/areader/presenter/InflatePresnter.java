@@ -24,7 +24,9 @@ public class InflatePresnter {
         Log.e("presenter",name);
         inflateBookType.showbookslist(name);
     }
-
+    public void postNUM(String num){
+        iBookTypeFragment.getNUM(num);
+    }
     public void updatelist(ArrayList<book> books){
         iBookTypeFragment.updateUI(books);
         //isearchActivity.hideP();

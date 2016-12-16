@@ -9,15 +9,12 @@
         android:textSize="24sp"
         android:id="@+id/catalog_title"
         android:layout_centerHorizontal="true"
-        android:layout_toRightOf="@+id/download"
-        android:layout_toLeftOf="@+id/change_sequence"
         android:gravity="center"
         android:singleLine="true"
         android:text="title"/>
     <ToggleButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/download"
         android:id="@+id/change_sequence"
         android:layout_alignParentRight="true"
         android:paddingRight="20dp"
@@ -25,12 +22,5 @@
         android:textOff="倒序"
         android:background="@android:color/transparent"
         android:checked="false" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/download"
-        android:text="缓存"
-        android:layout_alignParentLeft="true"
-        android:paddingLeft="20dp"
-        android:background="@android:color/transparent"/>
+
 </RelativeLayout>

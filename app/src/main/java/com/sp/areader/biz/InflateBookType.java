@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class InflateBookType {
     ArrayList<book> books=new ArrayList<book>();
+    String NumofPages;
     InflatePresnter presenter;
     public InflateBookType(InflatePresnter presenter){
         this.presenter=presenter;
@@ -33,15 +34,15 @@ public class InflateBookType {
                     Document doc = Jsoup.connect(url)
                             .get();
                     Elements items=doc.select("div.item");
-                    Log.e("inBiz",items.size()+"");
+                    //Log.e("inBiz",items.size()+"");
                     for (Element Item : items) {
-                        Log.e("0","Item:"+Item);
+                        //Log.e("0","Item:"+Item);
                         String title=Item.select("img").attr("alt");
                         String detail=Item.select("dd").text();
                         String ur=Item.select("a").attr("href");
                         String writer=Item.select("span").text();
                         String IMG=Item.select("img").attr("src");
-                        Log.e("book","title="+title+"writer="+writer+"detail="+detail+"ur="+ur+"img="+IMG);
+                        //Log.e("book","title="+title+"writer="+writer+"detail="+detail+"ur="+ur+"img="+IMG);
                         book mybook=new book();
                         mybook.setBook_name(title);
                         mybook.setBook_writter(writer);
@@ -51,6 +52,12 @@ public class InflateBookType {
                         books.add(mybook);
                     }
                     presenter.updatelist(books);
+                    Elements i=doc.select("a.last");
+                    for (Element Item : i) {
+                        NumofPages=Item.select("a.last").text();
+                        Log.e("a",NumofPages);
+                    }
+                    presenter.postNUM(NumofPages);
                 } catch (IOException e){
 
                     e.printStackTrace();

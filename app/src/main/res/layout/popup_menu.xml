@@ -15,14 +15,7 @@
             android:textColor="@color/white"
             android:background="@color/colorPrimary"
             android:id="@+id/pop_cata"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="字体"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:background="@color/colorPrimary"
-            android:id="@+id/pop_text"/>
+
         <ToggleButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -32,14 +25,7 @@
             android:textColor="@color/white"
             android:background="@color/colorPrimary"
             android:id="@+id/pop_light"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="缓存"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:background="@color/colorPrimary"
-            android:id="@+id/pop_download"/>
+
     </LinearLayout>
 
 </LinearLayout>

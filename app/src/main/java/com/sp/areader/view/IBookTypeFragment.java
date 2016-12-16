@@ -10,4 +10,5 @@ import java.util.ArrayList;
 
 public interface IBookTypeFragment {
     void updateUI(ArrayList<book> books);
+    void getNUM(String num);
 }

@@ -5,12 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.NestedScrollView;
@@ -54,6 +56,8 @@ public class TextActivity extends AppCompatActivity {
     private View popupview;
     private Button button1,button2,button4;
     private ToggleButton button3;
+    private SharedPreferences.Editor editor;
+    private SharedPreferences preferences;
 
     private LocalBroadcastManager localBroadcastManager;
 
@@ -71,6 +75,9 @@ public class TextActivity extends AppCompatActivity {
         nexturl=intent.getStringArrayListExtra("urllist");
         titles=intent.getStringArrayListExtra("titlelist");
         getText(url);
+        preferences= PreferenceManager.getDefaultSharedPreferences(this);
+        editor=preferences.edit();
+        boolean isNight=preferences.getBoolean("state",false);
 
         popupview=getLayoutInflater().inflate(R.layout.popup_menu, null);
         popupWindow=new PopupWindow(popupview, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT,true);
@@ -78,7 +85,6 @@ public class TextActivity extends AppCompatActivity {
         popupWindow.setTouchable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
-
         button1=(Button)popupview.findViewById(R.id.pop_cata);
         //button2=(Button)popupview.findViewById(R.id.pop_text);
         button3=(ToggleButton) popupview.findViewById(R.id.pop_light);
@@ -89,6 +95,13 @@ public class TextActivity extends AppCompatActivity {
                 finish();
             }
         });
+        if (isNight){
+            textView.setBackgroundColor(Color.BLACK);
+            textView.setTextColor(Color.WHITE);
+            title.setBackgroundColor(Color.BLACK);
+            title.setTextColor(Color.WHITE);
+            button3.performClick();
+        }
         button3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -97,12 +110,15 @@ public class TextActivity extends AppCompatActivity {
                     textView.setTextColor(Color.WHITE);
                     title.setBackgroundColor(Color.BLACK);
                     title.setTextColor(Color.WHITE);
-
+                    editor.putBoolean("state",true);
+                    editor.apply();
                 }else {
                     textView.setBackgroundColor(getResources().getColor(R.color.tan));
                     textView.setTextColor(Color.BLACK);
                     title.setBackgroundColor(getResources().getColor(R.color.tan));
                     title.setTextColor(Color.BLACK);
+                    editor.putBoolean("state",false);
+                    editor.apply();
                 }
             }
         });
@@ -162,6 +178,7 @@ public class TextActivity extends AppCompatActivity {
             }
         }).start();
     }
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

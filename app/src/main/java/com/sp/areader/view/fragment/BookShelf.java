@@ -134,9 +134,6 @@ public class BookShelf extends Fragment implements IBookShelf{
             cursor.requery();
             handler.obtainMessage(0).sendToTarget();
         }
-        /*dbHelper.insert(newbook);
-        cursor.requery();
-        handler.obtainMessage(0).sendToTarget();*/
     }
     Handler handler=new Handler(){
         @Override

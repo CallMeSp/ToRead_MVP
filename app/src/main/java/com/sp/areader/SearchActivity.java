@@ -138,7 +138,6 @@ public class SearchActivity extends Activity implements IsearchActivity{
                     progressBar.setVisibility(View.GONE);
                     break;
             }
-
         }
     };
     @Override

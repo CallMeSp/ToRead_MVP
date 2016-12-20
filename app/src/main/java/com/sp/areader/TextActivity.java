@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -38,6 +39,12 @@ import org.jsoup.nodes.Element;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by my on 2016/11/9.
@@ -58,8 +65,9 @@ public class TextActivity extends AppCompatActivity {
     private ToggleButton button3;
     private SharedPreferences.Editor editor;
     private SharedPreferences preferences;
-
+    private String TAG="TextActivity";
     private LocalBroadcastManager localBroadcastManager;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle s){
@@ -77,6 +85,7 @@ public class TextActivity extends AppCompatActivity {
         getText(url);
         preferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=preferences.edit();
+        progressBar=(ProgressBar) findViewById(R.id.text_progressbar);
         boolean isNight=preferences.getBoolean("state",false);
 
         popupview=getLayoutInflater().inflate(R.layout.popup_menu, null);
@@ -139,61 +148,85 @@ public class TextActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (dx >next) {
+                    progressBar.setVisibility(View.VISIBLE);
                     if(mstate.equals("false")){
                         position++;
-                        getText(nexturl.get(position));
+                        if (position==titles.size()){
+                            Toast.makeText(TextActivity.this,"到达最后一章",Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                            position--;
+                        }else {
+                            getText(nexturl.get(position));
+                        }
                     }else {
                         position--;
+                        if (position<0){
+                            Toast.makeText(TextActivity.this,"到达最后一章",Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                            position++;
+                        }else {
                         getText(nexturl.get(position));
+                        }
                     }
                 }else if(dx<last){
+                    progressBar.setVisibility(View.VISIBLE);
                     if (mstate.equals("false")){
                         position--;
-                        getText((nexturl.get(position)));
+                        if (position<0){
+                            Toast.makeText(TextActivity.this,"到达第一章",Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                            position++;
+                        }else {
+                            getText((nexturl.get(position)));
+                        }
                     }else {
                         position++;
+                        if (position==titles.size()){
+                            Toast.makeText(TextActivity.this,"到达第一章",Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                            position--;
+                        }else {
                         getText((nexturl.get(position)));
+                        }
                     }
                 }else{
                     popupWindow.showAtLocation(findViewById(R.id.scrollView), Gravity.BOTTOM,0,0);
                 }
             }
         });
-
     }
-    public void getText(String xxx){
-        final String x=xxx;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Document doc = Jsoup.connect(x).get();
-                    Element item=doc.getElementById("content");
-                    text=item.text();
-                    Log.e("0", "=" + text);
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-                Message.obtain(handler, 0).sendToTarget();
-            }
-        }).start();
+    public void getText(String url){
+        Observable.just(url)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.io())
+                .map(new Function<String, String>() {
+                    @Override
+                    public String apply(String s) throws Exception {
+                        Document doc = Jsoup.connect(s).get();
+                        Element item=doc.getElementById("content");
+                        String content=item.text();
+                        return content;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<String>() {
+                    @Override
+                    public void onNext(String value) {
+                        scrollView.scrollTo(0, 0);
+                        textView.setText(value);
+                        title.setText(titles.get(position));
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG,"error");
+                    }
+                    @Override
+                    public void onComplete() {
+                        progressBar.setVisibility(View.GONE);
+                        Log.e(TAG,"complete,bar?");
+                    }
+                });
     }
-
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    Log.e("0", "hhhhhhhhhhhhhh");
-                    scrollView.scrollTo(0, 0);
-                    textView.setText(text);
-                    title.setText(titles.get(position));
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
     @Override
     protected void onDestroy(){
         super.onDestroy();

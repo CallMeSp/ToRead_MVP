@@ -142,7 +142,6 @@ public class ListActivity extends Activity implements IlistActivity{
                 Toast.makeText(ListActivity.this, "点击事件触发", Toast.LENGTH_SHORT).show();
             }
         };
-
         clickList.add(clickListener);
         clickList.add(clickListener);
         clickList.add(clickListener);

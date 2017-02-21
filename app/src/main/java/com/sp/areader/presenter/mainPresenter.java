@@ -14,7 +14,7 @@ public class mainPresenter {
         this.imainActivity=imainActivity;
     }
     public void show_search(){
-        Log.e("0","+++"+imainActivity.getsearchbookname());
+        //Log.e("0","+++"+imainActivity.getsearchbookname());
         imainActivity.toSearchActivity();
     }
 }

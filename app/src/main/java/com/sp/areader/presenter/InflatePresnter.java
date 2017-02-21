@@ -21,7 +21,7 @@ public class InflatePresnter {
     }
     public void getlist(String name){
         //isearchActivity.showP();
-        Log.e("presenter",name);
+        //Log.e("presenter",name);
         inflateBookType.showbookslist(name);
     }
     public void postNUM(String num){

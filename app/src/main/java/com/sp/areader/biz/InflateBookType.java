@@ -99,7 +99,7 @@ public class InflateBookType {
                         Elements i=doc.select("a.last");
                         for (Element Item : i) {
                             NumofPages=Item.select("a.last").text();
-                            Log.e("a",NumofPages);
+                            //Log.e("a",NumofPages);
                         }
                         return books;
                     }
@@ -108,7 +108,7 @@ public class InflateBookType {
                 .subscribe(new DisposableObserver<ArrayList<book>>() {
                     @Override
                     public void onNext(ArrayList<book> value) {
-                        Log.e("onNext","!!!!!!");
+                        //Log.e("onNext","!!!!!!");
                         presenter.updatelist(value);
                         presenter.postNUM(NumofPages);
                     }
@@ -118,7 +118,7 @@ public class InflateBookType {
                     }
                     @Override
                     public void onComplete() {
-                        Log.e("complete","!!!!!!");
+                        //Log.e("complete","!!!!!!");
                     }
                 });
     }

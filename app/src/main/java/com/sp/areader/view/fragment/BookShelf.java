@@ -118,9 +118,9 @@ public class BookShelf extends Fragment implements IBookShelf{
     }
     @Override
     public void UpdateUI(book newbook){
-        Log.e("0","受到update请求");
+        //Log.e("0","受到update请求");
         int tag=0;
-        Log.e("0","count="+cursor.getCount());
+        //Log.e("0","count="+cursor.getCount());
         for (int i=0;i<cursor.getCount();i++){
             cursor.moveToPosition(i);
             if (cursor.getString(1).equals(newbook.getBook_name())){
@@ -128,7 +128,7 @@ public class BookShelf extends Fragment implements IBookShelf{
             }
         }
         if (tag==1){
-            Log.e("2333","该书已添加");
+            //Log.e("2333","该书已添加");
         }else {
             dbHelper.insert(newbook);
             cursor.requery();
@@ -138,7 +138,7 @@ public class BookShelf extends Fragment implements IBookShelf{
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message message){
-            Log.e("notify","receive and boradcast and update");
+            //Log.e("notify","receive and boradcast and update");
             adapter.notifyDataSetChanged();
         }
     };

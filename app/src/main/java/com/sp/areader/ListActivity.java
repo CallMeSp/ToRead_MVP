@@ -38,7 +38,7 @@ import java.util.Collections;
 /**
  * Created by sp on 2016/11/12.
  */
-public class ListActivity extends Activity implements IlistActivity{
+public class ListActivity extends BaseActivity implements IlistActivity{
     private ListView listView;
     private TextView textView;
     private ToggleButton toggleButton;
@@ -109,7 +109,7 @@ public class ListActivity extends Activity implements IlistActivity{
                 intent.putExtra("url", a);
                 intent.putExtra("position", "" + position);
                 intent.putExtra("state",""+state);
-                Log.e("0", "position=" + position);
+                //Log.e("0", "position=" + position);
                 startActivity(intent);
             }
         });
@@ -151,7 +151,7 @@ public class ListActivity extends Activity implements IlistActivity{
     Handler mhandeler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            Log.e("0", "hhhhhhhhhhhhhh+" + state);
+            //Log.e("0", "hhhhhhhhhhhhhh+" + state);
             switch (msg.what){
                 case 0:
                     adapter.notifyDataSetChanged();

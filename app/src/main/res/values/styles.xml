@@ -23,6 +23,8 @@
         <item name="colorPrimaryDark">@color/tan</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
     <style name="hehe" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimaryDark">@color/tan</item>
@@ -30,7 +32,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
         <item name="android:windowFullscreen">true</item>
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

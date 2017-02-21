@@ -49,7 +49,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by my on 2016/11/9.
  */
-public class TextActivity extends AppCompatActivity {
+public class TextActivity extends BaseActivity {
     public TextView textView,title;
     public String url="",text="";
     public ArrayList<String> nexturl=new ArrayList<String>(),titles=new ArrayList<String>();
@@ -83,6 +83,7 @@ public class TextActivity extends AppCompatActivity {
         nexturl=intent.getStringArrayListExtra("urllist");
         titles=intent.getStringArrayListExtra("titlelist");
         getText(url);
+
         preferences= PreferenceManager.getDefaultSharedPreferences(this);
         editor=preferences.edit();
         progressBar=(ProgressBar) findViewById(R.id.text_progressbar);
@@ -139,7 +140,7 @@ public class TextActivity extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN:
                         dx = event.getX();
                         wholex=textView.getWidth();last=wholex/3;next=wholex*2/3;
-                        Log.e("0","dx:" + dx+"   wholex:"+wholex);
+                        //Log.e("0","dx:" + dx+"   wholex:"+wholex);
                 }
                 return false;
             }
@@ -223,10 +224,11 @@ public class TextActivity extends AppCompatActivity {
                     @Override
                     public void onComplete() {
                         progressBar.setVisibility(View.GONE);
-                        Log.e(TAG,"complete,bar?");
+                        //Log.e(TAG,"complete,bar?");
                     }
                 });
     }
+
     @Override
     protected void onDestroy(){
         super.onDestroy();

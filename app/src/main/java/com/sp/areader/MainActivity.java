@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.SearchView;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements ImainActivity{
+public class MainActivity extends BaseActivity implements ImainActivity{
 
     SearchView searchView;
     TabLayout tabLayout;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements ImainActivity{
     mainPresenter mainPresenter=new mainPresenter(this);
     private TabAdapter adapter;
     private String s;
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements ImainActivity{
         Fragments.add(BookShelf.newinstance());
         Fragments.add(OnlineShelf.newinstance());
         adapter=new TabAdapter(getSupportFragmentManager(),Fragments);
-
         searchView=(SearchView)findViewById(R.id.tosearch);
         tabLayout=(TabLayout)findViewById(R.id.title_tab);
         viewPager=(ViewPager)findViewById(R.id.content_pager);

@@ -80,7 +80,7 @@ public class bookbiz implements Ibookbiz{     //根据搜索的书目名字拿�
                                 .get();
                         Elements items=doc.select("div.game-legend-a");
                         for (Element Item : items) {
-                            Log.e("0","Item:"+Item);
+                            //Log.e("0","Item:"+Item);
                             String title=Item.select("h3").text();
                             String detail=Item.select("p.result-game-item-desc").text();
                             String ur=Item.select("div.game-legend-a").attr("onclick");
@@ -109,7 +109,7 @@ public class bookbiz implements Ibookbiz{     //根据搜索的书目名字拿�
                     }
                     @Override
                     public void onComplete() {
-                        Log.e("bookbiz","onComplete");
+                        //Log.e("bookbiz","onComplete");
                     }
                 });
     }

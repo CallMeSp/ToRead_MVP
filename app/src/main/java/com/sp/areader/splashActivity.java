@@ -12,11 +12,11 @@ public class splashActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = new Intent(this, MainActivity.class);
-        try {
+        /*try {
             Thread.sleep(1000);
         }catch (InterruptedException s){
             s.printStackTrace();
-        }
+        }*/
         startActivity(intent);
         finish();
     }

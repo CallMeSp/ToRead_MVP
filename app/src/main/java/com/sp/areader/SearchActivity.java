@@ -37,7 +37,7 @@ import java.util.ArrayList;
 /**
  * Created by my on 2016/11/23.
  */
-public class SearchActivity extends Activity implements IsearchActivity{
+public class SearchActivity extends BaseActivity implements IsearchActivity{
 
     private SearchAdapter adapter;
     private String searchname="";

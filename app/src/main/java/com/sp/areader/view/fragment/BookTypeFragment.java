@@ -85,7 +85,7 @@ public class BookTypeFragment extends Fragment implements IBookTypeFragment{
                 myintent.putExtra("lovedBook_imgurl",mybooks.get(longClickposition).getBook_cover());
                 myintent.putExtra("lovedBook_contenturl",mybooks.get(longClickposition).getContenturl());
                 addtoBookShelf.sendBroadcast(myintent);
-                Log.e("执行","broadcast");
+                //Log.e("执行","broadcast");
                 hintPopupWindow.gonePopupWindow();
             }
         };
@@ -156,7 +156,7 @@ public class BookTypeFragment extends Fragment implements IBookTypeFragment{
                 .setOnDataSelectedListener(new DataPickerDialog.OnDataSelectedListener() {
                     @Override
                     public void onDataSelected(String itemValue, int position) {
-                        Log.e("choose","index"+itemValue+".html");
+                        //Log.e("choose","index"+itemValue+".html");
                         presnter.getlist(baseurl+nexturl+"index"+itemValue+".html");
                     }
                     @Override
@@ -168,7 +168,7 @@ public class BookTypeFragment extends Fragment implements IBookTypeFragment{
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message message){
-            Log.e("notify","receive and boradcast and update");
+            //Log.e("notify","receive and boradcast and update");
             adapter.notifyDataSetChanged();
         }
     };

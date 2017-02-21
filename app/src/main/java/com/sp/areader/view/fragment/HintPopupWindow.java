@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by zhaoshuang on 16/8/29.
+ * Created by SP on 16/8/29.
  * 弹出动画的popupwindow
  */
 public class HintPopupWindow {

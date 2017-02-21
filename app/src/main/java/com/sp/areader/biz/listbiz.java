@@ -61,7 +61,7 @@ public class listbiz implements Ilistbiz {
         showCatalogueByRxjava(url);
     }
     public void showCatalogueByRxjava(final String url){
-        Log.e("rx2","???????");
+        //Log.e("rx2","???????");
         Observable.just(url)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(Schedulers.io())
@@ -70,7 +70,7 @@ public class listbiz implements Ilistbiz {
                     public Map apply(String s) throws Exception {
                         Map tosave=new IdentityHashMap();
                         catalogue_list.clear();
-                        Log.e("0", "thread starts");
+                        //Log.e("0", "thread starts");
                         Document doc = Jsoup.connect(url).get();
                         Elements items=doc.select("dd");
                         for (Element Item : items) {
